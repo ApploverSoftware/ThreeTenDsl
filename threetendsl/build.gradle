@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/ApploverSoftware/ThreeTenDsl'
     gitUrl = 'https://github.com/ApploverSoftware/ThreeTenDsl.git'
 
-    libraryVersion = '0.1.1'
+    libraryVersion = '0.2.0'
 
     developerId = 'sp0rk' // Maven plugin uses this. I don't know if it needs to be anything special.
     developerName = 'Julian Jurec'
@@ -31,8 +31,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 2
-        versionName "0.1.1"
+        versionCode 3
+        versionName "0.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

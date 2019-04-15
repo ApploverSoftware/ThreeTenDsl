@@ -27,7 +27,7 @@ dateTimeOrNull { date { 1 April 2015 } at time { 4 h 79 m 50 } }?.apply {
 # Using in your project
 In module-level build.gradle add the dependency
 ``` Groovy
-implementation 'pl.applover:threetendsl:0.1.0'
+implementation 'pl.applover:threetendsl:0.2.0'
 ```
 
 # Uploading a new version (for Applover's devs)
