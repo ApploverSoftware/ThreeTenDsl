@@ -5,9 +5,29 @@ package pl.applover.threetendsl
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.threeten.bp.*
+import org.threeten.bp.temporal.Temporal
 
 @Suppress("HasPlatformType")
-internal object ThreeTenDsl : DateTimeDslContract {
+internal object ThreeTenDsl : DateTimeDslContract, PeriodDslContract, DurationDslContract {
+    //PeriodDSL
+
+    override fun LocalDate.till(future: LocalDate) = Period.between(this, future)
+    override fun LocalDate.since(past: LocalDate) = Period.between(past, this)
+    override fun Int.years(months: Int) = Period.ofYears(this).withMonths(months)
+    override fun Int.months(days: Int) = Period.ofMonths(this).withDays(days)
+    override fun Period.months(days: Int) = withDays(days)
+    override val Int.days: Period
+        get() = Period.ofDays(this)
+    override val Int.months: Period
+        get() = Period.ofMonths(this)
+    override val Int.years: Period
+        get() = Period.ofYears(this)
+
+    //DurationDSL
+
+    override fun Temporal.till(future: Temporal) = Duration.between(this, future)
+    override fun Temporal.since(past: Temporal) = Duration.between(past, this)
+
     //TimeDSL
 
     override infix fun LocalTime.m(s: Int) = withSecond(s)
@@ -54,6 +74,8 @@ internal object ThreeTenDsl : DateTimeDslContract {
 fun date(build: DateDslContract.() -> LocalDate) = ThreeTenDsl.build()
 fun time(build: TimeDslContract.() -> LocalTime) = ThreeTenDsl.build()
 fun dateTime(build: DateTimeDslContract.() -> LocalDateTime) = ThreeTenDsl.build()
+fun period(build: PeriodDslContract.() -> Period) = ThreeTenDsl.build()
+fun duration(build: DurationDslContract.() -> Duration) = ThreeTenDsl.build()
 
 fun dateOrNull(build: DateDslContract.() -> LocalDate) = try {
     ThreeTenDsl.build()
@@ -75,6 +97,21 @@ fun dateTimeOrNull(build: DateTimeDslContract.() -> LocalDateTime) = try {
     e.printStackTrace()
     null
 }
+
+fun periodOrNull(build: PeriodDslContract.() -> Period) = try {
+    ThreeTenDsl.build()
+} catch (e: DateTimeException) {
+    e.printStackTrace()
+    null
+}
+
+fun durationOrNull(build: DurationDslContract.() -> Duration) = try {
+    ThreeTenDsl.build()
+} catch (e: DateTimeException) {
+    e.printStackTrace()
+    null
+}
+
 
 fun Application.initThreeTenDsl() {
     AndroidThreeTen.init(this)
@@ -119,4 +156,20 @@ interface DateTimeDslContract : TimeDslContract, DateDslContract {
     infix fun LocalDateTime.October(year: Int): LocalDateTime
     infix fun LocalDateTime.November(year: Int): LocalDateTime
     infix fun LocalDateTime.December(year: Int): LocalDateTime
+}
+
+interface PeriodDslContract {
+    infix fun LocalDate.till(future: LocalDate): Period
+    infix fun LocalDate.since(past: LocalDate): Period
+    infix fun Int.years(months: Int): Period
+    infix fun Int.months(days: Int): Period
+    infix fun Period.months(days: Int): Period
+    val Int.days: Period
+    val Int.months: Period
+    val Int.years: Period
+}
+
+interface DurationDslContract {
+    infix fun Temporal.till(future: Temporal): Duration
+    infix fun Temporal.since(past: Temporal): Duration
 }
