@@ -2,9 +2,7 @@ package pl.applover.threetendsldemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.threeten.bp.Period
 import pl.applover.threetendsl.*
-import java.time.Duration
 
 class MainActivity : AppCompatActivity() {
 

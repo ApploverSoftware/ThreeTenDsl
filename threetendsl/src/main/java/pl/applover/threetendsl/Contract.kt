@@ -63,6 +63,15 @@ interface Contract {
         infix fun Long.years(months: Long): Duration
         infix fun Long.months(days: Long): Duration
         infix fun Duration.months(days: Long): Duration
+        infix fun Long.days(hours: Long): Duration
+        infix fun Duration.days(hours: Long): Duration
+        infix fun Long.h(minutes: Long): Duration
+        infix fun Duration.h(minutes: Long): Duration
+        infix fun Long.m(seconds: Long): Duration
+        infix fun Duration.m(seconds: Long): Duration
+        val Long.s: Duration
+        val Long.m: Duration
+        val Long.h: Duration
         val Long.days: Duration
         val Long.months: Duration
         val Long.years: Duration
