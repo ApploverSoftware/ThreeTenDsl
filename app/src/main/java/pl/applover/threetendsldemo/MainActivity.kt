@@ -40,10 +40,10 @@ class MainActivity : AppCompatActivity() {
         duration { 12 h 40 m 20 }
         duration { 40 m 20 }
         duration { 2 days 12 h 40 }
-        duration { 1 years 0 months 0 days 12 h 40 m 20 }
+        durationOrNull { 1 years 0 months 0 days 12 h 40 m 20 }
         duration { 1 years 0 months 0 }
 
-
+        duration { 9.years }
+        duration { 9.s }
     }
-
 }
